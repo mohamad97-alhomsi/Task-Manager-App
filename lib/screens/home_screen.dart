@@ -19,7 +19,7 @@ class HomeScreen extends StatelessWidget {
       child: Scaffold(
         drawer: Drawer(
           width: 200,
-          child: Column(children: [
+          child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
             ListTile(
               title: Text("My Local Tasks"),
               onTap: () {},

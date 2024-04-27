@@ -3,7 +3,9 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:task_manager_app/business_logic/auth_bloc/auth_bloc.dart';
+import 'package:task_manager_app/models/user_model.dart';
 import 'package:task_manager_app/repos/task_repo.dart';
+import 'package:task_manager_app/screens/home_screen.dart';
 import 'package:task_manager_app/widgets/custom_button.dart';
 import 'package:task_manager_app/widgets/custom_textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -42,6 +44,11 @@ class _LoginScreenState extends State<LoginScreen> {
                         ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
               behavior: SnackBarBehavior.floating,
               content: Text("Login Successfully"),backgroundColor: Colors.green,),);
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeScreen(),
+                ));
           }
         },
         builder: (context, state) {
@@ -51,6 +58,21 @@ class _LoginScreenState extends State<LoginScreen> {
               child: Scaffold(
                 drawer: Drawer(
                   width: 200.w,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      ListTile(
+                        title: Text("Go To Home Screen"),
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => HomeScreen(),
+                              ));
+                        },
+                      )
+                    ],
+                  ),
                 ),
                 appBar: AppBar(
                   title: const Text("Login"),
@@ -103,19 +125,17 @@ class _LoginScreenState extends State<LoginScreen> {
                               backgroundColor: Colors.blue,
                               text: "Login",
                               onPressed: () async {
-                                final repo = TaskRepo();
-                                await repo.fetchTasks();
-                                // if (_formKey.currentState!.validate()) {
-                                //   final _userData = UserModel(
-                                //       username: _userNameTextController.text,
-                                //       password: _passwordTextController.text);
-                                //   if (context.mounted) {
+              
+                                if (_formKey.currentState!.validate()) {
+                                  final _userData = UserModel(
+                                      username: _userNameTextController.text,
+                                      password: _passwordTextController.text);
+                                  if (context.mounted) {
 
-                                //   context
-                                //       .read<AuthBloc>()
-                                //       .add(AuthLoginEvent(userData: _userData));
-                                //   }
-                                // }
+                                    context.read<AuthBloc>().add(
+                                        AuthLoginEvent(userData: _userData));
+                                  }
+                                }
                               },
                               height: 48.h,
                             ),
