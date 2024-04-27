@@ -40,4 +40,9 @@ class Todo {
         completed: json["completed"],
         userId: json["userId"],
       );
+  Map<String, dynamic> toJson() => {
+        "todo": todo,
+        "completed": completed,
+        "userId": userId,
+      };
 }

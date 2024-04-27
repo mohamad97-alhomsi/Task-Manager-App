@@ -50,6 +50,39 @@ Logger().w(body);
       return _handleStatusCode(response);
     });
   }
+  
+  Future<ApiResponse> delete(
+    String path, {
+    String? baseUrl,
+    Map<String, dynamic>? body,
+    Map<String, String>? headers,
+    Map<String, dynamic>? parameters,
+  }) async {
+    final url = Uri.https(baseUrl ?? ApiConstants.baseUrl, path, parameters);
+    return await requestServer(() async {
+      final response = await _dio
+          .deleteUri(url, data: body, options: Options(headers: headers))
+          .timeout(const Duration(seconds: _timeOut));
+      return _handleStatusCode(response);
+    });
+  }
+
+  Future<ApiResponse> update(
+    String path, {
+    Map<String, dynamic>? body,
+    Map<String, String>? headers,
+    Map<String, dynamic>? parameters,
+  }) async {
+    final url = Uri.https(ApiConstants.baseUrl, path, parameters);
+    return await requestServer(() async {
+      final response = await _dio.putUri(
+        url,
+        data: body == null ? {} : jsonEncode(body),
+        options: Options(headers: headers),
+      );
+      return _handleStatusCode(response);
+    });
+  }
 
   Future<ApiResponse> requestServer(Future Function() computation) async {
     try {

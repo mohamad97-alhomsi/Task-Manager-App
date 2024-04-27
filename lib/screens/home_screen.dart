@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 import 'package:task_manager_app/business_logic/task_bloc/task_bloc.dart';
 import 'package:task_manager_app/models/todo_model.dart';
+import 'package:task_manager_app/screens/new_task_screen.dart';
 import 'package:task_manager_app/widgets/task_item.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -20,7 +21,13 @@ class HomeScreen extends StatelessWidget {
           width: 200,
         ),
         floatingActionButton: FloatingActionButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => NewTaskScreen(),
+                ));
+          },
           child: const Icon(Icons.add),
         ),
         appBar: AppBar(
@@ -60,8 +67,11 @@ class HomeScreen extends StatelessWidget {
                       currentPage == tasks.total!) {
                     return Text("No More Data");
                   }
-                  return TaskItem(
-                    title: tasksList[index].todo ?? "",
+                  return BlocProvider<TaskBloc>(
+                    create: (context) => TaskBloc(),
+                    child: TaskItem(
+                      todoModel: tasksList[index],
+                    ),
                   );
                 },
               );

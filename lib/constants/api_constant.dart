@@ -4,7 +4,10 @@ class ApiConstants {
 
   //?Auth
 static const String login = "/auth/login";
-static const String todo = "/todos";
+static const String getTodos = "/todos";
+  static const String addTodo = "/todos/add";
+  static const String updateTodo = "/todos/";
+  static const String deleteTodo = "/todos/";
   //?Headers
   static const String contentType = 'Content-Type';
   static const String accept = 'Accept';
