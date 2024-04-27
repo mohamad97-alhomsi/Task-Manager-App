@@ -17,8 +17,14 @@ class HomeScreen extends StatelessWidget {
       create: (context) =>
           TaskBloc()..add(FetchTaskEvent(skip: currentPage * 10)),
       child: Scaffold(
-        drawer: const Drawer(
+        drawer: Drawer(
           width: 200,
+          child: Column(children: [
+            ListTile(
+              title: Text("My Local Tasks"),
+              onTap: () {},
+            ),
+          ]),
         ),
         floatingActionButton: FloatingActionButton(
           onPressed: () {

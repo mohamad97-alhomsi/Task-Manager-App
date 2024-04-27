@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_manager_app/screens/home_screen.dart';
+import 'package:task_manager_app/services/storage_service/storage_service.dart';
 
-void main() {
+void main() async {
+  await StorageService.getDatabase;
   runApp(const MyApp());
 }
 
