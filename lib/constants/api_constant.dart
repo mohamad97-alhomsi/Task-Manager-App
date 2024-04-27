@@ -4,6 +4,7 @@ class ApiConstants {
 
   //?Auth
 static const String login = "/auth/login";
+static const String todo = "/todos";
   //?Headers
   static const String contentType = 'Content-Type';
   static const String accept = 'Accept';

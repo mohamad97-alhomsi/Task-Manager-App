@@ -19,7 +19,7 @@ class ApiClient {
   }) async {
     final url =
         uri ?? Uri.http(baseUrl ?? ApiConstants.baseUrl, path, parameters);
-
+    print(url);
     return await requestServer(() async {
       final response = await _dio
           .getUri(
@@ -40,6 +40,7 @@ class ApiClient {
     Map<String, dynamic>? parameters,
   }) async {
     final url = Uri.https(baseUrl ?? ApiConstants.baseUrl, path, parameters);
+  
 Logger().w(body);
     return await requestServer(() async {
       final response = await _dio

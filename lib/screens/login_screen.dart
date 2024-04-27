@@ -3,7 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:logger/logger.dart';
 import 'package:modal_progress_hud_nsn/modal_progress_hud_nsn.dart';
 import 'package:task_manager_app/business_logic/auth_bloc/auth_bloc.dart';
-import 'package:task_manager_app/models/user_model.dart';
+import 'package:task_manager_app/repos/task_repo.dart';
 import 'package:task_manager_app/widgets/custom_button.dart';
 import 'package:task_manager_app/widgets/custom_textfield.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -103,14 +103,19 @@ class _LoginScreenState extends State<LoginScreen> {
                               backgroundColor: Colors.blue,
                               text: "Login",
                               onPressed: () async {
-                                if (_formKey.currentState!.validate()) {
-                                  final _userData = UserModel(
-                                      username: _userNameTextController.text,
-                                      password: _passwordTextController.text);
-                                  context
-                                      .read<AuthBloc>()
-                                      .add(AuthLoginEvent(userData: _userData));
-                                }
+                                final repo = TaskRepo();
+                                await repo.fetchTasks();
+                                // if (_formKey.currentState!.validate()) {
+                                //   final _userData = UserModel(
+                                //       username: _userNameTextController.text,
+                                //       password: _passwordTextController.text);
+                                //   if (context.mounted) {
+
+                                //   context
+                                //       .read<AuthBloc>()
+                                //       .add(AuthLoginEvent(userData: _userData));
+                                //   }
+                                // }
                               },
                               height: 48.h,
                             ),

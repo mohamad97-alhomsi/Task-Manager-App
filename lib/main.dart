@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:task_manager_app/screens/login_screen.dart';
+import 'package:task_manager_app/screens/home_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -17,10 +17,10 @@ class MyApp extends StatelessWidget {
         return MaterialApp(
           title: 'Flutter Demo',
           theme: ThemeData(
-            colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+          colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue),
             useMaterial3: true,
           ),
-          home: LoginScreen(),
+        home: HomeScreen(),
         );
       }
     );
